@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MessengerService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IMessengerService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000">
+          </wsrm:InactivityTimeout>
+          <wsrm:AcknowledgementInterval Milliseconds="200">
+          </wsrm:AcknowledgementInterval>
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/MessangerServiceLibrary.DataContracts" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMessengerService_Join_InputMessage">
+    <wsdl:part name="parameters" element="tns:Join" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_Broadcast_InputMessage">
+    <wsdl:part name="parameters" element="tns:Broadcast" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_Broadcast_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BroadcastResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_Whisper_InputMessage">
+    <wsdl:part name="parameters" element="tns:Whisper" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_Whisper_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WhisperResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_Leave_InputMessage">
+    <wsdl:part name="parameters" element="tns:Leave" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_Leave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_RecieveBroadcast_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RecieveBroadcast" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_RecieveBroadcast_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RecieveBroadcastResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_RecieveWhisper_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RecieveWhisper" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_RecieveWhisper_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RecieveWhisperResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_OnJoin_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnJoin" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_OnJoin_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnJoinResponse" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="IMessengerService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Join">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/Join" message="tns:IMessengerService_Join_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Broadcast">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/Broadcast" message="tns:IMessengerService_Broadcast_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/BroadcastResponse" message="tns:IMessengerService_Broadcast_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Whisper">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/Whisper" message="tns:IMessengerService_Whisper_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/WhisperResponse" message="tns:IMessengerService_Whisper_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="true" name="Leave">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/Leave" message="tns:IMessengerService_Leave_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/LeaveResponse" message="tns:IMessengerService_Leave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RecieveBroadcast">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/RecieveBroadcast" message="tns:IMessengerService_RecieveBroadcast_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/RecieveBroadcastResponse" message="tns:IMessengerService_RecieveBroadcast_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RecieveWhisper">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/RecieveWhisper" message="tns:IMessengerService_RecieveWhisper_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/RecieveWhisperResponse" message="tns:IMessengerService_RecieveWhisper_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnJoin">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/OnJoin" message="tns:IMessengerService_OnJoin_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/OnJoinResponse" message="tns:IMessengerService_OnJoin_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IMessengerService" type="tns:IMessengerService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IMessengerService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Join">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/Join" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Broadcast">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/Broadcast" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Whisper">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/Whisper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Leave">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/Leave" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecieveBroadcast">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/RecieveBroadcast" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecieveWhisper">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/RecieveWhisper" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnJoin">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/OnJoin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessengerService">
+    <wsdl:port name="NetTcpBinding_IMessengerService" binding="tns:NetTcpBinding_IMessengerService">
+      <soap12:address location="net.tcp://localhost:8733/Design_Time_Addresses/MessangerServiceLibrary/Service1/" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8733/Design_Time_Addresses/MessangerServiceLibrary/Service1/</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
