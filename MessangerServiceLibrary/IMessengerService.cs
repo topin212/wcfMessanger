@@ -21,7 +21,7 @@ namespace MessangerServiceLibrary
         [OperationContract(IsTerminating = true)]
         void Leave(string who);
     }
-    
+
     public interface IClientCallback
     {
         [OperationContract]

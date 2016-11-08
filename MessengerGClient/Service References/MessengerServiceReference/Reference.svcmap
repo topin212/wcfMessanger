@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="149ddba8-c50b-41b5-81a9-d15c75fcc8db" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://localhost:8733/Messanger/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="dc10dd70-df93-4b25-8071-b8a1f6069063" SourceId="1" SourceUrl="net.tcp://localhost:8733/Messanger/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="e3208500-1c21-439d-bcd1-9f62060c3752" SourceId="1" SourceUrl="net.tcp://localhost:8733/Messanger/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="73798af2-ef57-4e28-b3ac-d496a85dad04" SourceId="1" SourceUrl="net.tcp://localhost:8733/Messanger/mex" />
+    <MetadataFile FileName="MessangerServiceLibrary.DataContracts.xsd" MetadataType="Schema" ID="947231e0-2d19-4d9b-a218-11b80e2b2c30" SourceId="1" SourceUrl="net.tcp://localhost:8733/Messanger/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="37965bb1-87a3-45f1-a158-c23960e21512" SourceId="1" SourceUrl="net.tcp://localhost:8733/Messanger/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -13,7 +13,8 @@ namespace MessangerServiceLibrary
         static Dictionary<Client, IClientCallback> clients = new Dictionary<Client, IClientCallback>();
         static List<string> clientList = new List<string>();
 
-        public IClientCallback currentCallback{
+        public IClientCallback currentCallback
+        {
             get
             {
                 return OperationContext.Current.GetCallbackChannel<IClientCallback>();
@@ -47,7 +48,7 @@ namespace MessangerServiceLibrary
 
         public void Broadcast(string from, string message)
         {
-            foreach(var client in clients)
+            foreach (var client in clients)
             {
                 client.Value.RecieveBroadcast(new Message(from, message));
                 Console.WriteLine("[{0}] {1} : {2}", DateTime.Now, from, message);
@@ -56,8 +57,8 @@ namespace MessangerServiceLibrary
 
         public void Whisper(string from, string to, string message)
         {
-            IClientCallback client = null; 
-            if(clients.TryGetValue(new Client(to), out client))
+            IClientCallback client = null;
+            if (clients.TryGetValue(new Client(to), out client))
             {
                 client.RecieveBroadcast(new Message(from, message));
             }
